@@ -1,0 +1,406 @@
+/* Pink background for the entire page */
+body {
+    margin: 0;
+    background: pink; /* full pink background */
+    display: flex;
+    justify-content: center; /* horizontally center */
+    /* optional: center vertically if you want */
+    /* align-items: center; */
+    min-height: 100vh;
+  }
+
+  .DesktopHomeViewer {
+    width: 1440px;
+    height: 1520px;
+    position: relative;
+    background: #FFE6EC; /* original pinkish background inside container */
+    overflow: hidden;
+  }
+
+  /* ... rest of your CSS unchanged ... */
+
+  .BottomLine2 {
+    width: 1440px;
+    height: 0;
+    left: 0;
+    top: 816px;
+    position: absolute;
+    outline: 1px #FD70C3 solid;
+    outline-offset: -0.5px;
+  }
+  .AboutMe {
+    left: 918px;
+    top: 753px;
+    position: absolute;
+    color: #FF99D5;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Gallery {
+    left: 758px;
+    top: 753px;
+    position: absolute;
+    color: #FF99D5;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Posts {
+    left: 620px;
+    top: 753px;
+    position: absolute;
+    color: #FF99D5;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Home {
+    left: 476px;
+    top: 753px;
+    position: absolute;
+    color: #3BDBFF;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+    text-shadow: 3px 3px 8px rgba(39, 159, 211, 0.10);
+  }
+  .Line1 {
+    width: 1440.04px;
+    height: 0;
+    left: 0;
+    top: 729px;
+    position: absolute;
+    outline: 1px #FD70C3 solid;
+    outline-offset: -0.5px;
+  }
+  .Banner {
+    width: 1440px;
+    height: 380px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #D9D9D9;
+    border: 1px #FD70C3 solid;
+  }
+  .ContentFrame {
+    width: 1440px;
+    height: 704px;
+    left: 0;
+    top: 816px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .PostCardContainer {
+    width: 982px;
+    height: 648px;
+    left: 412px;
+    top: 28px;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 50px;
+  }
+  .Rectangle7 {
+    width: 981.68px;
+    height: 648px;
+    position: absolute;
+    background: #FFCCEA;
+    border-radius: 50px;
+    border: 1px #FD70C3 solid;
+  }
+  .Rectangle7.left {
+    left: 0;
+    top: 0;
+  }
+  .Rectangle7.middle-left {
+    left: 1008.44px;
+    top: 0;
+  }
+  .Rectangle7.middle-right {
+    left: 2016.88px;
+    top: 0;
+  }
+  .Rectangle7.right {
+    left: 3025.32px;
+    top: 0;
+  }
+  .FeaturedArtsAndCommsionSheets {
+    width: 850px;
+    height: 219.36px;
+    position: absolute;
+    color: black;
+    font-size: 40px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .FeaturedArtsAndCommsionSheets.left {
+    left: 115.62px;
+    top: 146.24px;
+  }
+  .FeaturedArtsAndCommsionSheets.middle-left {
+    left: 1124.06px;
+    top: 146.24px;
+  }
+  .FeaturedArtsAndCommsionSheets.middle-right {
+    left: 2132.50px;
+    top: 146.24px;
+  }
+  .FeaturedArtsAndCommsionSheets.right {
+    left: 3140.94px;
+    top: 146.24px;
+  }
+  .Image8 {
+    width: 984px;
+    height: 649px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    border-radius: 50px;
+    border: 3px #FD70C3 solid;
+  }
+  .Rectangle6 {
+    width: 347px;
+    height: 233px;
+    left: 45px;
+    top: 440px;
+    position: absolute;
+    background: #FFCCEA;
+    border-radius: 50px;
+    border: 3px #FD70C3 solid;
+  }
+  .OtherInfo {
+    width: 235.21px;
+    height: 37.3px;
+    left: 100.89px;
+    top: 526.71px;
+    position: absolute;
+    color: #FFF6E3;
+    font-size: 48px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .MascotFrame {
+    width: 347px;
+    height: 391px;
+    left: 45px;
+    top: 28px;
+    position: absolute;
+    background: #8DDDFF;
+    overflow: hidden;
+    border-radius: 50px;
+    outline: 3px #FD70C3 solid;
+    outline-offset: -3px;
+  }
+  .Image6 {
+    width: 356px;
+    height: 535px;
+    left: 0;
+    top: 0;
+    position: absolute;
+  }
+  .BannerFrame {
+    width: 1440px;
+    height: 380px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    overflow: hidden;
+    outline: 3px #FD70C3 solid;
+    outline-offset: -3px;
+  }
+  .Image7 {
+    width: 1440px;
+    height: 534px;
+    left: 0;
+    top: -77px;
+    position: absolute;
+  }
+  .ProfilePicture {
+    width: 251px;
+    height: 251px;
+    left: 45px;
+    top: 303px;
+    position: absolute;
+    background: #5D5B5B;
+    border-radius: 150px;
+    border: 10px #FF99D5 solid;
+  }
+  .KoFi {
+    left: 375.62px;
+    top: 656px;
+    position: absolute;
+    color: #8DDDFF;
+    font-size: 24px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .TeacupSet {
+    width: 33.62px;
+    height: 26px;
+    left: 337px;
+    top: 657.5px;
+    position: absolute;
+  }
+  .Instagram {
+    width: 33px;
+    height: 33px;
+    left: 336px;
+    top: 615px;
+    position: absolute;
+  }
+  .InstagramLink {
+    left: 374px;
+    top: 617px;
+    position: absolute;
+    color: #8DDDFF;
+    font-size: 24px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Discord {
+    left: 374px;
+    top: 578px;
+    position: absolute;
+    color: #8DDDFF;
+    font-size: 24px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .DiscordNew {
+    width: 33.04px;
+    height: 24.97px;
+    left: 336px;
+    top: 580px;
+    position: absolute;
+  }
+  .Facebook {
+    left: 374px;
+    top: 539px;
+    position: absolute;
+    color: #8DDDFF;
+    font-size: 24px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .FacebookImg {
+    width: 33px;
+    height: 33px;
+    left: 336px;
+    top: 537px;
+    position: absolute;
+  }
+  .Rectangle4 {
+    width: 213px;
+    height: 67px;
+    left: 1194px;
+    top: 405px;
+    position: absolute;
+    background: #FD70C3;
+    border-radius: 20px;
+  }
+  .Donate {
+    left: 1246px;
+    top: 419px;
+    position: absolute;
+    color: #FFF6E3;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Rectangle3 {
+    width: 213px;
+    height: 67px;
+    left: 958px;
+    top: 405px;
+    position: absolute;
+    background: #FD70C3;
+    border-radius: 20px;
+  }
+  .Comission {
+    left: 995px;
+    top: 417px;
+    position: absolute;
+    color: #FFF6E3;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Bio {
+    left: 336px;
+    top: 474px;
+    position: absolute;
+    color: #FF99D5;
+    font-size: 32px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .Taromimi {
+    left: 336px;
+    top: 405px;
+    position: absolute;
+    color: #FF99D5;
+    font-size: 48px;
+    font-family: 'Leckerli One', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  .ProfilePictureFrame {
+    width: 233px;
+    height: 233px;
+    left: 54px;
+    top: 312px;
+    position: absolute;
+    background: #8DDDFF;
+    overflow: hidden;
+    border-radius: 150px;
+  }
+  .Image5 {
+    width: 548px;
+    height: 823px;
+    left: -188px;
+    top: -82px;
+    position: absolute;
+  }
+  .Ellipse1,
+  .Ellipse2,
+  .Ellipse3,
+  .Ellipse4 {
+    width: 24.66px;
+    height: 24.66px;
+    position: absolute;
+    border-radius: 9999px;
+    border: 2px #FD70C3 solid;
+  }
+  .Ellipse1 {
+    left: 834px;
+    top: 1444px;
+    background: #8DDDFF;
+  }
+  .Ellipse2 {
+    left: 872.11px;
+    top: 1444px;
+    background: #FD70C3;
+  }
+  .Ellipse3 {
+    left: 910.23px;
+    top: 1444px;
+    background: #FD70C3;
+  }
+  .Ellipse4 {
+    left: 948.34px;
+    top: 1444px;
+    background: #FD70C3;
+  }

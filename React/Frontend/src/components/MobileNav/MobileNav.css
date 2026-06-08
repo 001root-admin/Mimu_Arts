@@ -1,0 +1,40 @@
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 8px 12px;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 200;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mobile-nav-item.active {
+  color: var(--accent-gold);
+}
+
+.mobile-nav-item.create-btn {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose));
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .mobile-nav {
+    display: flex;
+  }
+}

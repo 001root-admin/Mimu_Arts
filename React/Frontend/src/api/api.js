@@ -34,7 +34,7 @@ const getApiBase = () => {
     return 'http://10.0.2.2:5000';
   }
   // LAN: Use your computer's local IP for testing on real devices
-  return 'http://localhost:5000';
+  return 'https://mimu-arts-backend.onrender.com';
 };
 
 const API_URL = `${getApiBase()}/api`;

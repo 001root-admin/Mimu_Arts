@@ -2,26 +2,48 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { useAuth } from '../../context/AuthContext';
+import { getServerUrl } from '../../api/api';
 
-const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
+const Navbar = ({ onNavigate, currentPage, user, onViewProfile, onSearch }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
   const { logout } = useAuth();
   const menuRef = useRef();
+  const avatarRef = useRef();
+  const API_BASE = getServerUrl();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchText.trim()) {
+      onSearch && onSearch(searchText.trim());
+      onNavigate('people');
+    }
+  };
+
+  const avatarSrc = user?.avatar && !user.avatar.includes('default')
+    ? `${API_BASE}${user.avatar}` : assets.profilepic;
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+      if (menuRef.current && !menuRef.current.contains(e.target) && 
+          avatarRef.current && !avatarRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
+    document.addEventListener('touchstart', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('touchstart', handleClick);
+    };
   }, []);
 
   return (
     <div className='navbar'>
       <div className='nav-left'>
         <div className='logo' onClick={() => onNavigate('feed')} style={{ cursor: 'pointer' }}>
-          <span className='logo-text'>Mimi's</span>
+          <span className='logo-text'>Mimu Arts</span>
         </div>
       </div>
 
@@ -30,7 +52,9 @@ const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
           <svg className='search-icon' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
-          <input type="text" placeholder="Search..." />
+          <form onSubmit={handleSearch}>
+            <input type="text" placeholder="Search people..." value={searchText} onChange={e => setSearchText(e.target.value)} />
+          </form>
         </div>
       </div>
 
@@ -46,25 +70,20 @@ const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
           {user?.role === 'admin' && (
             <button className={`nav-link ${currentPage === 'admin' ? 'active' : ''}`} onClick={() => onNavigate('admin')}>Admin</button>
           )}
-          <button className={`nav-link ${currentPage === 'theme' ? 'active' : ''}`} onClick={() => onNavigate('theme')}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-            Theme
-          </button>
         </div>
 
         <div className='nav-icons'>
-          <div className='nav-avatar' onClick={() => setMenuOpen(!menuOpen)}>
-            <img src={assets.profilepic} alt="Profile" />
+          <div className='nav-avatar' ref={avatarRef} onClick={() => setMenuOpen(!menuOpen)} onTouchEnd={(e) => { e.preventDefault(); setMenuOpen(!menuOpen); }}>
+            <img src={avatarSrc} alt="Profile" />
           </div>
         </div>
 
         {menuOpen && (
           <div className='nav-user-menu' ref={menuRef}>
             <div className='menu-user-info'>
-              <div className='menu-avatar'><img src={assets.profilepic} alt="" /></div>
+              <div className='menu-avatar' onClick={() => { setMenuOpen(false); onViewProfile && onViewProfile(user?.id); }}>
+                <img src={avatarSrc} alt="" />
+              </div>
               <div>
                 <p className='menu-username'>{user?.username || 'user'}</p>
                 <p className='menu-email'>{user?.email || ''}</p>
@@ -76,8 +95,7 @@ const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
             <div className='menu-divider'></div>
             <button className='menu-item' onClick={() => { setMenuOpen(false); onViewProfile && onViewProfile(user?.id); }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
               My Profile
             </button>
@@ -93,7 +111,13 @@ const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
               </svg>
-              Custom Theme
+              Themes
+            </button>
+            <button className='menu-item' onClick={() => { setMenuOpen(false); onNavigate('gallery'); }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+              </svg>
+              Gallery
             </button>
             {user?.role === 'admin' && (
               <button className='menu-item' onClick={() => { setMenuOpen(false); onNavigate('admin'); }}>
@@ -103,12 +127,6 @@ const Navbar = ({ onNavigate, currentPage, user, onViewProfile }) => {
                 Admin Panel
               </button>
             )}
-            <button className='menu-item' onClick={() => { setMenuOpen(false); onNavigate('feed'); }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              </svg>
-              Home Feed
-            </button>
             <div className='menu-divider'></div>
             <button className='menu-item' onClick={logout}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

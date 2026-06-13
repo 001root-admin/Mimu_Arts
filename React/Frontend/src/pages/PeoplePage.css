@@ -1,0 +1,188 @@
+.people-page {
+  width: 100%;
+}
+
+.people-header {
+  margin-bottom: 20px;
+}
+
+.people-header h2 {
+  font-size: 24px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.people-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.people-search {
+  margin-bottom: 24px;
+}
+
+.people-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.people-search-bar svg {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.people-search-bar input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.people-search-bar input::placeholder {
+  color: var(--text-secondary);
+}
+
+.people-search-btn {
+  padding: 6px 16px;
+  background: var(--accent-gold);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.people-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.people-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.people-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-gold);
+  flex-shrink: 0;
+}
+
+.people-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.people-username {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.people-display {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.people-stats {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.people-follow-btn {
+  padding: 6px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent-gold);
+  color: white;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.people-follow-btn.following {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.people-follow-btn:hover {
+  opacity: 0.9;
+}
+
+.people-loader {
+  padding: 24px;
+  text-align: center;
+}
+
+.people-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.people-empty .empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.people-empty h3 {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.people-empty p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.people-load-more {
+  padding: 12px 32px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 16px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.people-load-more:hover {
+  border-color: var(--accent-gold);
+}

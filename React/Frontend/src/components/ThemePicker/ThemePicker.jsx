@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ThemePicker.css';
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
+import { api } from '../../api/api';
 
-const ThemePicker = () => {
-  const { themes, currentTheme, changeTheme, isDark, toggleMode, themeName } = useTheme();
+const ThemePicker = ({ onOpenCustomEditor }) => {
+  const { themes, currentTheme, changeTheme, isDark, toggleMode, themeName, hasCustomTheme } = useTheme();
+  const { user } = useAuth();
+  const [customColors, setCustomColors] = useState(null);
+
+  useEffect(() => {
+    if (hasCustomTheme && user?.id) {
+      api.getCustomTheme().then(t => {
+        if (t && t.user_id) {
+          setCustomColors(isDark
+            ? { a1: t.accent1, a2: t.accent2 }
+            : { a1: t.accent1, a2: t.accent2 });
+        }
+      }).catch(() => {});
+    }
+  }, [hasCustomTheme, user, isDark]);
+
+  const customGradient = customColors
+    ? `linear-gradient(135deg, ${customColors.a1}, ${customColors.a2})`
+    : 'linear-gradient(135deg, #BB8A5E, #A7807D)';
 
   return (
     <div className='theme-picker'>
@@ -29,11 +49,23 @@ const ThemePicker = () => {
             <span className='theme-tooltip'>{theme.name}</span>
           </button>
         ))}
+
+        {hasCustomTheme && (
+          <button
+            className={`theme-btn theme-btn-custom ${currentTheme === 'custom' ? 'active' : ''}`}
+            onClick={() => changeTheme('custom')}
+            style={{ background: customGradient }}
+            title="My Custom Theme"
+          >
+            <span className='theme-tooltip'>My Custom</span>
+            <span className='theme-btn-custom-icon' aria-hidden>★</span>
+          </button>
+        )}
       </div>
 
       <div className='mode-toggle'>
-        <button 
-          className={`mode-btn ${!isDark ? 'active' : ''}`} 
+        <button
+          className={`mode-btn ${!isDark ? 'active' : ''}`}
           onClick={() => isDark && toggleMode()}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -42,8 +74,8 @@ const ThemePicker = () => {
           </svg>
           <span>Light</span>
         </button>
-        <button 
-          className={`mode-btn ${isDark ? 'active' : ''}`} 
+        <button
+          className={`mode-btn ${isDark ? 'active' : ''}`}
           onClick={() => !isDark && toggleMode()}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

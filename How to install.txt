@@ -1,0 +1,282 @@
+===============================================
+   MIMU ARTS - Installation & Deployment Guide
+===============================================
+
+TABLE OF CONTENTS
+-----------------
+1. Local Development Setup
+2. Deploy Backend to Render (FREE)
+3. Deploy Backend to Railway (FREE)
+4. Deploy Frontend to GitHub Pages (FREE)
+5. Build Android APK
+6. Account Recovery Setup
+
+===============================================
+1. LOCAL DEVELOPMENT SETUP
+===============================================
+
+PREREQUISITES:
+- Node.js 18+ (https://nodejs.org)
+- npm or yarn
+- Git
+
+BACKEND SETUP:
+  cd "backend"
+  npm install
+  
+  Create a .env file with:
+    PORT=5000
+    JWT_SECRET=your_secret_key_here
+    DATABASE_URL=sqlite:./database.sqlite
+    # For email recovery (optional):
+    SMTP_HOST=smtp.gmail.com
+    SMTP_PORT=587
+    SMTP_USER=your_email@gmail.com
+    SMTP_PASS=your_app_password
+    SMTP_FROM=Mimu Arts <your_email@gmail.com>
+  
+  npm start
+
+FRONTEND SETUP:
+  cd "React/Frontend"
+  npm install
+  npm run dev
+
+  The app will be available at http://localhost:5173
+  Backend runs at http://localhost:5000
+
+===============================================
+2. DEPLOY BACKEND TO RENDER (FREE)
+===============================================
+
+Render offers a free tier for web services.
+
+STEPS:
+  1. Push your code to GitHub:
+     cd "backend"
+     git init
+     git add .
+     git commit -m "Initial commit"
+     git remote add origin https://github.com/YOUR_USERNAME/mimu-arts-backend.git
+     git push -u origin main
+
+  2. Go to https://render.com and sign up (free)
+
+  3. Click "New +" → "Web Service"
+
+  4. Connect your GitHub repo (mimu-arts-backend)
+
+  5. Configure:
+     - Name: mimu-arts-backend
+     - Runtime: Node
+     - Build Command: npm install
+     - Start Command: node server.js
+     - Instance Type: Free
+
+  6. Add Environment Variables:
+     PORT=5000
+     JWT_SECRET=your_random_secret_key
+     DATABASE_URL=sqlite:./database.sqlite
+     
+     For email recovery, add:
+     SMTP_HOST=smtp.gmail.com
+     SMTP_PORT=587
+     SMTP_USER=your_email@gmail.com
+     SMTP_PASS=your_app_password
+     SMTP_FROM=Mimu Arts <your_email@gmail.com>
+
+  7. Click "Create Web Service"
+
+  8. Your backend will be live at:
+     https://mimu-arts-backend.onrender.com
+
+  NOTE: Free tier spins down after inactivity. First request 
+  may take 30-60 seconds to wake up.
+
+===============================================
+3. DEPLOY BACKEND TO RAILWAY (FREE)
+===============================================
+
+Railway offers $5 free credit per month.
+
+STEPS:
+  1. Go to https://railway.app and sign up with GitHub
+
+  2. Click "New Project" → "Deploy from GitHub repo"
+
+  3. Select your backend repo
+
+  4. Railway auto-detects Node.js. Set these env vars:
+     PORT=5000
+     JWT_SECRET=your_random_secret_key
+     DATABASE_URL=sqlite:./database.sqlite
+     
+     For email recovery:
+     SMTP_HOST=smtp.gmail.com
+     SMTP_PORT=587
+     SMTP_USER=your_email@gmail.com
+     SMTP_PASS=your_app_password
+     SMTP_FROM=Mimu Arts <your_email@gmail.com>
+
+  5. Railway will auto-deploy. Your backend URL will be:
+     https://mimu-arts-backend.up.railway.app
+
+  6. Go to Settings → Networking → Generate Domain to get 
+     a public URL.
+
+===============================================
+4. DEPLOY FRONTEND TO GITHUB PAGES (FREE)
+===============================================
+
+For the web version hosted for free:
+
+STEPS:
+  1. First, update the API URL in the frontend:
+     Edit React/Frontend/src/api/api.js
+     In the getApiBase() function, change the default return to:
+       return 'https://YOUR_BACKEND_URL.onrender.com';
+     (Replace with your actual backend URL)
+
+  2. Build the frontend:
+     cd "React/Frontend"
+     npm run build
+
+  3. Push to GitHub:
+     git init
+     git add .
+     git commit -m "Deploy frontend"
+     git remote add origin https://github.com/YOUR_USERNAME/mimu-arts-frontend.git
+     git push -u origin main
+
+  4. Go to your repo Settings → Pages
+
+  5. Source: Deploy from a branch → Branch: main → Folder: /dist
+
+  6. Your site will be live at:
+     https://YOUR_USERNAME.github.io/mimu-arts-frontend/
+
+  IMPORTANT: Make sure your backend allows CORS from your 
+  GitHub Pages domain. In backend/server.js, update:
+    app.use(cors({ origin: ['https://YOUR_USERNAME.github.io'] }));
+
+===============================================
+5. BUILD ANDROID APK
+===============================================
+
+REQUIREMENTS:
+- Node.js 18+
+- Java JDK 17+
+- Android Studio (https://developer.android.com/studio)
+- Android SDK 34+
+
+STEPS:
+
+  1. Update API URL for production:
+     Edit React/Frontend/src/api/api.js
+     Change the default API URL to your deployed backend:
+       return 'https://YOUR_BACKEND_URL.onrender.com';
+
+  2. Build the frontend:
+     cd "React/Frontend"
+     npm install
+     npx vite build
+
+  3. Add Android platform (first time only):
+     npx cap add android
+
+  4. Copy web assets to Android:
+     npx cap copy android
+     npx cap sync android
+
+  5. Open in Android Studio:
+     npx cap open android
+
+  6. In Android Studio:
+     - Wait for Gradle sync to complete
+     - Go to Build → Generate Signed Bundle/APK
+     - Choose APK → Next
+     - Create a new keystore or use existing
+     - Choose release build type
+     - Click Finish
+
+  7. APK location:
+     android/app/build/outputs/apk/release/app-release.apk
+
+  8. Install on your phone:
+     Transfer the APK file to your phone and install it.
+     (Enable "Install from unknown sources" in settings)
+
+===============================================
+6. ACCOUNT RECOVERY SETUP (EMAIL)
+===============================================
+
+The app includes a built-in password recovery system.
+When enabled, users can reset their password via email.
+
+SETUP:
+
+  1. For Gmail, create an App Password:
+     - Go to https://myaccount.google.com/security
+     - Enable 2-Step Verification
+     - Go to "App passwords" (search in settings)
+     - Generate a new app password for "Mail"
+     - Copy the 16-character password
+
+  2. Add these environment variables to your backend:
+     SMTP_HOST=smtp.gmail.com
+     SMTP_PORT=587
+     SMTP_USER=your_email@gmail.com
+     SMTP_PASS=xxxx-xxxx-xxxx-xxxx  (your app password)
+     SMTP_FROM=Mimu Arts <your_email@gmail.com>
+
+  3. In the Admin Dashboard, enable "Email Recovery" in 
+     Authentication Settings.
+
+  4. Users will see a "Forgot password?" link on the 
+     login page. Clicking it sends a reset link to their 
+     email with a token to set a new password.
+
+  For development/testing:
+  - If SMTP is not configured, reset tokens are logged 
+    to the server console
+  - Users can see the token in browser console too
+
+===============================================
+QUICK START SUMMARY
+===============================================
+
+For local testing:
+  Backend:  cd backend && npm install && npm start
+  Frontend: cd React/Frontend && npm install && npm run dev
+
+For free hosting:
+  Backend:  Deploy to Render (free tier)
+  Frontend: Deploy to GitHub Pages (free)
+
+For mobile app:
+  Build APK using the Android section above
+
+===============================================
+TROUBLESHOOTING
+===============================================
+
+Q: Images not showing on phone?
+A: Make sure your backend URL is correct in api.js and 
+   the backend is running. Check that uploads folder exists.
+
+Q: App shows "Cannot connect to server"?
+A: Verify your backend URL is accessible. Render free tier 
+   may take 30-60 seconds to wake up on first request.
+
+Q: Email recovery not working?
+A: Check SMTP credentials. Gmail requires App Password, 
+   not regular password. Check server logs for errors.
+
+Q: APK not installing?
+A: Enable "Install from unknown sources" in Android settings.
+   Make sure you're using release build, not debug.
+
+===============================================
+   Mimu Arts - Share your moments
+   © 2026 Mimu Arts
+===============================================

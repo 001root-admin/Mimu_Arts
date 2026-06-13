@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { api } from '../api/api';
+import { api, getServerUrl, setServerUrl } from '../api/api';
 import { assets } from '../assets/assets';
 import './UserSettings.css';
 
@@ -9,6 +9,8 @@ const UserSettings = ({ onBack }) => {
   const [displayName, setDisplayName] = useState(user?.display_name || '');
   const [bio, setBio] = useState(user?.bio || '');
   const [saved, setSaved] = useState(false);
+  const [serverUrl, setServerUrlState] = useState(getServerUrl() || 'http://YOUR_PC_IP:5000');
+  const [serverMsg, setServerMsg] = useState('');
 
   const handleSave = async () => {
     await api.updateProfile({ display_name: displayName, bio });
@@ -85,6 +87,33 @@ const UserSettings = ({ onBack }) => {
 
           <button className='save-profile-btn' onClick={handleSave}>
             {saved ? '✅ Saved!' : '💾 Save Changes'}
+          </button>
+        </div>
+
+        {/* Server URL Setting */}
+        <div className='settings-card'>
+          <h3>Server Connection</h3>
+          <p className='input-hint' style={{marginBottom:8}}>
+            Phone can't reach localhost. Enter your computer's LAN IP (e.g. 192.168.0.241:5000) or deployed server URL.
+          </p>
+          <div className='form-group'>
+            <input 
+              type="text" 
+              value={serverUrl} 
+              onChange={e => setServerUrlState(e.target.value)} 
+              placeholder="http://YOUR_PC_IP:5000"
+            />
+          </div>
+          {serverMsg && <div className={serverMsg.includes('Error') ? 'error-msg' : 'success-msg'} style={{fontSize:13,marginBottom:8}}>{serverMsg}</div>}
+          <button className='save-profile-btn' onClick={() => {
+            try {
+              setServerUrl(serverUrl.replace(/\/+$/,''));
+              setServerMsg('✅ Server URL saved! Reloading...');
+            } catch(e) {
+              setServerMsg('Error: ' + e.message);
+            }
+          }}>
+            Save & Reload
           </button>
         </div>
 

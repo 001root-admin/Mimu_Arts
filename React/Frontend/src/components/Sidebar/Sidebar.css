@@ -1,7 +1,5 @@
 .sidebar {
   width: 320px;
-  position: sticky;
-  top: 80px;
   height: fit-content;
   padding: 20px 0;
 }
@@ -10,15 +8,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-top: 16px;
   margin-bottom: 24px;
 }
 
 .sidebar-profile-avatar {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+  border: 2px solid var(--accent-gold);
 }
 
 .sidebar-profile-avatar img {
@@ -53,6 +53,35 @@
   cursor: pointer;
 }
 
+.sidebar-nav-links {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.sidebar-nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-nav-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
 .sidebar-suggestions {
   margin-bottom: 24px;
 }
@@ -77,6 +106,14 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.suggestions-count {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 2px 8px;
+  border-radius: 999px;
 }
 
 .suggestions-list {
@@ -134,6 +171,48 @@
 }
 
 .follow-btn:hover {
+  color: var(--accent-gold);
+}
+
+.follow-btn.following {
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.follow-btn.following:hover {
+  color: #e74c3c;
+  background: var(--bg-card);
+}
+
+.follow-btn.following:hover::before {
+  content: 'Unfollow';
+}
+
+.follow-btn.following span,
+.follow-btn.following {
+  font-size: 12px;
+}
+
+.follow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.suggestions-following-summary {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.suggestions-following-summary strong {
   color: var(--accent-gold);
 }
 

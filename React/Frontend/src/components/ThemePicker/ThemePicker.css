@@ -97,3 +97,29 @@
 .mode-btn:not(.active):hover {
   color: var(--text-primary);
 }
+
+/* Custom theme button (My Custom ★) */
+.theme-btn-custom {
+  border: 2px dashed var(--border-color);
+}
+
+.theme-btn-custom.active {
+  border-style: solid;
+}
+
+.theme-btn-custom-icon {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  background: var(--bg-card);
+  color: var(--accent-gold);
+  font-size: 11px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  pointer-events: none;
+}
